@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 15:08:50 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/07 16:38:05 by rmaxima          ###   ########.fr       */
+/*   Created: 2020/02/07 17:23:13 by rmaxima           #+#    #+#             */
+/*   Updated: 2020/02/07 17:30:26 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 
-int     main()
+void        ft_draw(t_fractol *fractol)
 {
-    t_fractol   *fractol;
-    t_mouse     mouse;
-
-    mouse.left_key = 0;
-    mouse.right_key = 0;
-    mouse.third_key = 0;
-
-    fractol = (t_fractol *)malloc(sizeof(t_fractol));
-    
     double minRe = -2.0;
     double maxRe = 1.0;
     double minIm = -1.2;
-    double maxIm = minIm + (maxIm - minRe) * fractol->image_height / fractol->image_width;
+    double maxIm;
+    maxIm = minIm + (maxRe - minRe) * fractol->image_height / fractol->image_width;
     double re_fractol = (maxIm - minRe) / (fractol->image_width - 1);
     double im_fractol = (maxIm - minIm) / (fractol->image_height - 1);
     double c_re;
@@ -39,15 +31,17 @@ int     main()
     t_bool is_inside;
     int n;
     int max_iter = 30;
+    int y;
+    int x;
 
-    fractol->y = 0;
-    while (fractol->y < fractol->image_height)
+    y = 0;
+    while (y < fractol->image_height)
     {
         c_im = maxIm - fractol->y * im_fractol;
-        fractol->x = 0;
-        while (fractol->x < fractol->image_width)
+        x = 0;
+        while (x < fractol->image_width)
         {
-            c_re = minRe + fractol->x * re_fractol;
+            c_re = minRe + x * re_fractol;
             z_re = c_re;
             z_im = c_im;
             is_inside = true;
@@ -64,11 +58,11 @@ int     main()
                 z_im = 2 * z_re * z_im + c_im;
                 z_re = z_re2 - z_im2 + c_re;
                 if (is_inside)
-                    mlx_pixel_put(fractol->mlx, fractol->win, fractol->x, fractol->y, 0xFFFFFF);
+                    mlx_pixel_put(fractol->mlx, fractol->win, x, y, 0xFFFFFF);
                 n++;
             }
-            fractol->x++;
+            x++;
         }
-        fractol->y++;
+        y++;
     }
 }

@@ -1,11 +1,11 @@
 NAME = fractol
 MINILIB_PATH = ./minilibx_macos
-SRSC_DIR = ./srcs
+SRCS_DIR = ./srcs
 I_DIR = ./includes
-OBJS_DIR = OBJS_DIR
+OBJS_DIR = objs
 CC = gcc
 CFLAGC = -Wall -Wextra -Werror
-_SRCS = 
+_SRCS = fractol_init.c fractol.c draw.c
 
 
 SRSC = $(addprefix $(SRCS_DIR)/. $(_SRCS))

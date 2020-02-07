@@ -6,7 +6,7 @@
 /*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/07 16:43:10 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/02/07 17:25:19 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ typedef struct s_fractol
     void        *win;
 }               t_fractol;
 
+void        ft_fractol_init(t_fractol *fractol);
+void        ft_draw(t_fractol *fractol);
 
 #endif
