@@ -19,10 +19,12 @@ BLINK = \033[5m
 RESET = \033[0m
 
 all: $(NAME)
+	@afplay ./music/make.mp3 -t 5 &
+	@echo "\n$(NAME): $(GREEN)$(NAME) was created"
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) $(CFLAGC) -L$(MINILIB_PATH) -lmlx -framework OpenGL -framework AppKit
-	@echo "\n$(NAME): $(GREEN)$(NAME) was created"
+	
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p objs
@@ -30,6 +32,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(CC) -c -o $@ $< $(CFLAGC) -I$(I_DIR) -I$(MINILIB_PATH)
 
 clean:
+	@afplay ./music/clean.mp3 -t 5 &
 	@rm -f $(OBJS)
 	@echo "$(NAME): $(RED).$(RESET)"
 	@echo "$(NAME): $(RED)objects files was deleted"
@@ -38,5 +41,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
-
+	
 .PHONY: all clean fclean re
