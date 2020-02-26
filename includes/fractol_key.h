@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fdf_key_num.h                                   :+:      :+:    :+:   */
+/*   fractol_key.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lliza <lliza@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 15:31:54 by lliza             #+#    #+#             */
-/*   Updated: 2020/02/05 15:31:56 by lliza            ###   ########.fr       */
+/*   Created: 2020/02/25 17:10:06 by rmaxima           #+#    #+#             */
+/*   Updated: 2020/02/25 17:15:27 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FDF_KEY_NUM_H
-# define FT_FDF_KEY_NUM_H
+#ifndef FRACTOL_KEY_H
+# define FRACTOL_KEY_H
 # define MOUSE_LEFT_BUTTON  1
 # define MOUSE_RIGHT_BUTTON	2
 # define MOUSE_THIRD_BUTTON	3

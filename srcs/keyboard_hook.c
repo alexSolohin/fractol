@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_hook.c                                        :+:      :+:    :+:   */
+/*   keyboard_hook.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 14:45:33 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/26 15:52:12 by rmaxima          ###   ########.fr       */
+/*   Created: 2020/02/25 17:18:12 by rmaxima           #+#    #+#             */
+/*   Updated: 2020/02/26 17:22:42 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 #include "fractol_key.h"
 #include "mlx.h"
 
-int     ft_init_hook(t_fractol *fractol)
+int     ft_keyboard_hook(int key, void *param)
 {
-    mlx_hook(fractol->win, KEY_BUTTON_PRESS, 0, ft_keyboard_hook, fractol);
-    mlx_hook(fractol->win, ESC_BUTTON_PRESS, 0, ft_close, fractol);
+    if (key == MAIN_PAD_ESC)
+        ft_close(param);
+    else
+        return (0);
+    ft_draw(param);
     return (0);
 }

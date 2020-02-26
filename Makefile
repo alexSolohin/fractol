@@ -5,7 +5,14 @@ I_DIR = ./includes
 OBJS_DIR = objs
 CC = gcc
 CFLAGC = -Wall -Wextra -Werror
-_SRCS = fractol_init.c fractol.c draw.c
+_SRCS = fractol_init.c \
+		fractol.c \
+		draw.c \
+		fractol_init_img.c \
+		keyboard_hook.c \
+		init_hook.c \
+		mandelbrot.c \
+
 
 
 SRSC = $(addprefix $(SRCS_DIR)/. $(_SRCS))
@@ -19,7 +26,8 @@ BLINK = \033[5m
 RESET = \033[0m
 
 all: $(NAME)
-	@afplay ./music/make.mp3 -t 5 &
+	# @say -v Fred hello, my name is Stephen Hawking, `date "+DATE: %Y-%m-%d"`
+	@say -v Fred $(NAME) was created
 	@echo "\n$(NAME): $(GREEN)$(NAME) was created"
 
 $(NAME): $(OBJS)
@@ -32,7 +40,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(CC) -c -o $@ $< $(CFLAGC) -I$(I_DIR) -I$(MINILIB_PATH)
 
 clean:
-	@afplay ./music/clean.mp3 -t 5 &
+	@say -v Fred Go then, there are other worlds than these.
 	@rm -f $(OBJS)
 	@echo "$(NAME): $(RED).$(RESET)"
 	@echo "$(NAME): $(RED)objects files was deleted"

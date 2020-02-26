@@ -6,23 +6,41 @@
 /*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:23:13 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/13 16:34:06 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:24:10 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 
-t_complex   init_complex(double re, double im)
-{
-    t_complex complex;
+// t_complex   init_complex(double re, double im)
+// {
+//     t_complex complex;
 
-    complex.re = re;
-    complex.im = im;
-    return (complex);
+//     complex.re = re;
+//     complex.im = im;
+//     return (complex);
+// }
+
+unsigned long createRGB(int r, int g, int b)
+{   
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }
 
+int     calculate_color(int i, int max_i)
+{
+    double t;
+    int color;
 
+    t = (double)i / (double)max_i;
+    color = 0;
+    int red = (int)(9 * (1 - t) * pow(t, 3) * 255);
+    int green = (int)(15 * pow((1 - t), 2) * pow(t, 2) * 255);
+    int blue = (int)(8.5 * pow((1 - t), 3) * t * 255);
+    
+    
+    return (createRGB(red, green, blue));
+}
 
 void        ft_draw(t_fractol *fractol)
 {

@@ -6,7 +6,7 @@
 /*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/11 15:54:42 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/02/26 17:22:24 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,15 @@
 # define ENDIAN 0
 # define RED 0xFF0000
 # define GREEN 0xFF00
-# define BLUE 0xFF
+# define BLUE 0x000066
+# define WHITE 0xFFFFFF
 #include <math.h>
+#include <stdint.h>
+
+typedef	struct		s_color
+{
+	int8_t			channel[4];
+}					t_color;
 
 typedef enum		e_bool
 {
@@ -58,10 +65,31 @@ typedef struct s_mouse
 
 typedef struct s_fractol
 {
+    int         start_line;
+    int         finish_line;
+    int         max_iteration;
+    t_complex   min;
+    t_complex   max;
+    t_complex   k;
+    t_complex   c;
+    t_complex   factor;
+    int         color_shift;
     int         x;
     int         y;
     int         image_width;
     int         image_height;
+    int         min_re;
+    int         max_re;
+    int         min_im;
+    int         max_im;
+    int         re_factor;
+    int         im_factor;
+    int         c_im;
+    int         c_re;
+    int         z_re;
+    int         z_im;
+    int         z_re2;
+    int         z_im2;
     void        *mlx;
     void        *win;
     void        *img;
@@ -70,21 +98,17 @@ typedef struct s_fractol
     char        *pixels_arr;
     int         error;
     int         error2;
-    double      min_re;
-    double      max_re;
-    double      min_im;
-    double      max_im;
-    double      re_factor;
-    double      im_factor;
-    double      c_im;
-    double      c_re;
-    double      z_re;
-    double      z_re2;
-    double      z_im;
-    double      z_im2;
 }               t_fractol;
 
 void        ft_fractol_init(t_fractol *fractol);
 void        ft_draw(t_fractol *fractol);
+void        ft_draw2(t_fractol *fractol);
+int         ft_fractol_init_img(t_fractol *fractol);
+int         ft_init_hook(t_fractol *fractol);
+int         ft_keyboard_hook(int key, void *param);
+int         ft_close(void *param);
+int		    iterate_mandelbrot(t_fractol *fractol);
+void         ft_draw3(t_fractol *fractol);
+t_complex   init_complex(double re, double im);
 
 #endif
