@@ -5,13 +5,13 @@ I_DIR = ./includes
 OBJS_DIR = objs
 CC = gcc
 CFLAGC = -Wall -Wextra -Werror
-_SRCS = fractol_init.c \
-		fractol.c \
-		draw.c \
-		fractol_init_img.c \
-		keyboard_hook.c \
-		init_hook.c \
-		mandelbrot.c \
+_SRCS = fractol.c \
+		mandelbrot.c
+		# draw.c \
+		# fractol_init_img.c \
+		# keyboard_hook.c \
+		# init_hook.c \
+		
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/26 17:22:24 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/02/29 21:06:25 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 # define WHITE 0xFFFFFF
 #include <math.h>
 #include <stdint.h>
+
+
+typedef struct		s_image
+{
+	void			*image;
+	char			*data_addr;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+}					t_image;
 
 typedef	struct		s_color
 {
@@ -73,23 +83,25 @@ typedef struct s_fractol
     t_complex   k;
     t_complex   c;
     t_complex   factor;
+    t_image     *image;
     int         color_shift;
     int         x;
     int         y;
     int         image_width;
     int         image_height;
-    int         min_re;
-    int         max_re;
-    int         min_im;
-    int         max_im;
-    int         re_factor;
-    int         im_factor;
-    int         c_im;
-    int         c_re;
-    int         z_re;
-    int         z_im;
-    int         z_re2;
-    int         z_im2;
+    // int         min_re;
+    // int         max_re;
+    // int         min_im;
+    // int         max_im;
+    // int         re_factor;
+    // int         im_factor;
+    // int         c_im;
+    // int         c_re;
+    // int         z_re;
+    // int         z_im;
+    // int         z_re2;
+    // int         z_im2;
+    int				(*formula)(struct s_fractol *fractol);
     void        *mlx;
     void        *win;
     void        *img;
