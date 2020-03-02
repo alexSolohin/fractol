@@ -3,38 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/10 15:22:28 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/26 16:47:32 by rmaxima          ###   ########.fr       */
+/*   Created: 2020/03/02 15:18:54 by user              #+#    #+#             */
+/*   Updated: 2020/03/02 19:09:27 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// t_complex   init_complex(double re, double im)
-// {
-//     t_complex complex;
 
-//     complex.re = re;
-//     complex.im = im;
-//     return (complex);
-// }
-
-int		iterate_mandelbrot(t_fractol *fractol)
+void    mandelbrot_init(t_fractol *fractol)
 {
-	int			iteration;
-	t_complex	z;
+    fractol->max_iteration = 50;
+    fractol->zoom = 300;
+    fractol->x1 = -2.05;
+    fractol->y1 = -1.3;
+    fractol->color = 265;
+}
 
-	iteration = 0;
-	z = init_complex(fractol->c.re, fractol->c.im);
-	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4
-		&& iteration < fractol->max_iteration)
-	{
-		z = init_complex(
-			pow(z.re, 2.0) - pow(z.im, 2.0) + fractol->c.re,
-			2.0 * z.re * z.im + fractol->c.im);
-		iteration++;
-	}
-	return (iteration);
+void    mandelbrot_calc(t_fractol *fractol)
+{
+    
+    
+    double MinRe = -2.0;
+    double MaxRe = 1.0;
+    double MinIm = -1.2;
+    double MaxIm = MinIm+(MaxRe-MinRe)*HEIGHT/WIDTH;
+    double Re_factor = (MaxRe-MinRe)/(WIDTH-1);
+    double Im_factor = (MaxIm-MinIm)/(HEIGHT-1);
+    unsigned MaxIterations = 30;
+
+    for(unsigned y=0; y<HEIGHT; ++y)
+    {
+        double c_im = MaxIm - y*Im_factor;
+        for(unsigned x=0; x<WIDTH; ++x)
+        {
+            double c_re = MinRe + x*Re_factor;
+
+            double Z_re = c_re, Z_im = c_im;
+            int isInside = 1;
+            for(unsigned n=0; n<MaxIterations; ++n)
+            {
+                double Z_re2 = Z_re*Z_re, Z_im2 = Z_im*Z_im;
+                if(Z_re2 + Z_im2 > 4)
+                {
+                    isInside = 0;
+                    break;
+                }
+                Z_im = 2*Z_re*Z_im + c_im;
+                Z_re = Z_re2 - Z_im2 + c_re;
+            }
+            if(isInside)
+                mlx_pixel_put(fractol->mlx, fractol->win, x, y, GREEN);
+            else
+                mlx_pixel_put(fractol->mlx, fractol->win, x, y, WHITE);
+            
+        }
+    }   
+}
+
+void    *mandelbrot(void *tab)
+{
+    t_fractol *fractol;
+    int tmp;
+
+    fractol = (t_fractol *)tab;
+    fractol->x = 0;
+    tmp = fractol->y;
+    while (fractol->x < WIDTH)
+    {
+        fractol->y = tmp;
+        while (fractol->y < fractol->y_max)
+        {
+            mandelbrot_calc(fractol);
+            fractol->y++;
+        }
+        fractol->x++;
+    }
+    return (fractol);
+}
+
+void    mandelbrot_pthread(t_fractol *fractol)
+{
+    t_fractol tab[10];
+    pthread_t   t[10];
+    int i;
+
+    i = 0;
+    while (i < 10)
+    {
+        ft_memcpy((void*)&tab[i], (void*)fractol, sizeof(t_fractol));
+        tab[i].y = 10 * i;
+        tab[i].y_max = 10 * (i + 1);
+        pthread_create(&t[i], NULL, mandelbrot, &tab[i]);
+        i++;
+    }
+    while (i--)
+    {
+        pthread_join(t[i], NULL);
+    }
+    mlx_put_image_to_window(fractol->mlx, fractol->win, fractol->img, 0, 0);
 }

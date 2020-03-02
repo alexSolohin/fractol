@@ -1,0 +1,3 @@
+# @say -v Fred hello, my name is Stephen Hawking, `date "+DATE: %Y-%m-%d"`
+	#@say -v Fred $(NAME) was created
+	@echo "\n$(NAME): $(GREEN)$(NAME) was created"

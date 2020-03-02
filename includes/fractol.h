@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/02/29 21:06:25 by user             ###   ########.fr       */
+/*   Updated: 2020/03/02 18:57:46 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@
 # define BLUE 0x000066
 # define WHITE 0xFFFFFF
 #include <math.h>
+#include <stdlib.h>
 #include <stdint.h>
+#include <pthread.h>
+#include "libft.h"
+#include "mlx.h"
 
 
 typedef struct		s_image
@@ -80,31 +84,41 @@ typedef struct s_fractol
     int         max_iteration;
     t_complex   min;
     t_complex   max;
+    t_complex   z;
     t_complex   k;
     t_complex   c;
     t_complex   factor;
     t_image     *image;
+    int         iteration;
     int         color_shift;
     int         x;
     int         y;
+    double      x1;
+    double      y1;
+    int         color;
     int         image_width;
     int         image_height;
+    int         zoom;
     // int         min_re;
     // int         max_re;
     // int         min_im;
     // int         max_im;
     // int         re_factor;
     // int         im_factor;
-    // int         c_im;
-    // int         c_re;
-    // int         z_re;
-    // int         z_im;
+    int         c_im;
+    int         c_re;
+    int         z_re;
+    int         z_im;
     // int         z_re2;
     // int         z_im2;
-    int				(*formula)(struct s_fractol *fractol);
+    double      tmp;
+    int         y_max;
+    void        *img_ptr;
     void        *mlx;
     void        *win;
     void        *img;
+    int         endian;
+    int         type;
     int         bits_per_pixel;
     int         line_size;
     char        *pixels_arr;
@@ -112,15 +126,31 @@ typedef struct s_fractol
     int         error2;
 }               t_fractol;
 
-void        ft_fractol_init(t_fractol *fractol);
-void        ft_draw(t_fractol *fractol);
-void        ft_draw2(t_fractol *fractol);
-int         ft_fractol_init_img(t_fractol *fractol);
-int         ft_init_hook(t_fractol *fractol);
-int         ft_keyboard_hook(int key, void *param);
-int         ft_close(void *param);
-int		    iterate_mandelbrot(t_fractol *fractol);
-void         ft_draw3(t_fractol *fractol);
-t_complex   init_complex(double re, double im);
-
+/*
+**			<====================== start util ======================>
+*/
+int		ft_close(void *param);
+void    put_pxl_to_img(t_fractol *fractol, int x, int y, int color);
+/*
+**			<====================== end util ======================>
+*/
+/*
+**			<====================== start fractol.c ======================>
+*/
+void    ft_mlx_win_init(t_fractol *fractol);
+int     ft_name_fractol(char *av, t_fractol *fractol);
+/*
+**			<====================== end fractol.c ======================>
+*/
+/*
+**			<====================== start keyboard.c ======================>
+*/
+int     key_press(int key, t_fractol *fractol);
+/*
+**			<====================== end keyboard.c ======================>
+*/
+void    *mandelbrot(void *tab);
+void    mandelbrot_pthread(t_fractol *fractol);
+void    mandelbrot_init(t_fractol *fractol);
+void    mandelbrot_calc(t_fractol *fractol);
 #endif
