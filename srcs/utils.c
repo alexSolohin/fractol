@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:02:42 by user              #+#    #+#             */
-/*   Updated: 2020/03/02 18:33:33 by user             ###   ########.fr       */
+/*   Updated: 2020/03/02 22:31:22 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 #include "libft.h"
+
+t_complex	init_complex(double re, double im)
+{
+	t_complex	complex;
+
+	complex.re = re;
+	complex.im = im;
+	return (complex);
+}
 
 int		ft_close(void *param)
 {

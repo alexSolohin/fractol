@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:55:55 by user              #+#    #+#             */
-/*   Updated: 2020/03/02 18:53:16 by user             ###   ########.fr       */
+/*   Updated: 2020/03/04 11:40:44 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int     ft_name_fractol(char *av, t_fractol *fractol)
     else
     {
         ft_putstr(av);
-        ft_putendl(" is'n a valid");
+        ft_putendl(" is not a valid");
     }
     return (fractol->type);
 }
@@ -70,6 +70,7 @@ int     main(int ac, char **av)
         fractol_init(fractol);
         mlx_hook(fractol->win, 2, 0, key_press, fractol);
         mlx_hook(fractol->win, 17, 0, ft_close, fractol);
+        // mlx_hook(fractol->win, 4, 0, zoom, fractol);
         mlx_loop(fractol->mlx);
     }
     else

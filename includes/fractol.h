@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/03/02 18:57:46 by user             ###   ########.fr       */
+/*   Updated: 2020/03/02 22:45:34 by alex             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,38 +79,30 @@ typedef struct s_mouse
 
 typedef struct s_fractol
 {
-    int         start_line;
-    int         finish_line;
     int         max_iteration;
-    t_complex   min;
-    t_complex   max;
-    t_complex   z;
-    t_complex   k;
-    t_complex   c;
-    t_complex   factor;
-    t_image     *image;
     int         iteration;
-    int         color_shift;
     int         x;
     int         y;
-    double      x1;
-    double      y1;
     int         color;
     int         image_width;
     int         image_height;
     int         zoom;
-    // int         min_re;
-    // int         max_re;
-    // int         min_im;
-    // int         max_im;
-    // int         re_factor;
-    // int         im_factor;
-    int         c_im;
-    int         c_re;
-    int         z_re;
-    int         z_im;
-    // int         z_re2;
-    // int         z_im2;
+    t_complex       min;
+    t_complex       max;
+    t_complex       c;
+    t_complex       z;
+    double         min_re;
+    double         max_re;
+    double         min_im;
+    double         max_im;
+    double         re_factor;
+    double         im_factor;
+    double         c_im;
+    double         c_re;
+    double         z_re;
+    double         z_im;
+    double         z_re2;
+    double         z_im2;
     double      tmp;
     int         y_max;
     void        *img_ptr;
@@ -122,32 +114,33 @@ typedef struct s_fractol
     int         bits_per_pixel;
     int         line_size;
     char        *pixels_arr;
-    int         error;
-    int         error2;
+    int         inside;
 }               t_fractol;
 
 /*
 **			<====================== start util ======================>
 */
-int		ft_close(void *param);
-void    put_pxl_to_img(t_fractol *fractol, int x, int y, int color);
+int		    ft_close(void *param);
+void        put_pxl_to_img(t_fractol *fractol, int x, int y, int color);
+t_complex	init_complex(double re, double im);
 /*
 **			<====================== end util ======================>
 */
 /*
 **			<====================== start fractol.c ======================>
 */
-void    ft_mlx_win_init(t_fractol *fractol);
-int     ft_name_fractol(char *av, t_fractol *fractol);
+void        ft_mlx_win_init(t_fractol *fractol);
+int         ft_name_fractol(char *av, t_fractol *fractol);
 /*
 **			<====================== end fractol.c ======================>
 */
 /*
-**			<====================== start keyboard.c ======================>
+**			<====================== start controls.c ======================>
 */
 int     key_press(int key, t_fractol *fractol);
+
 /*
-**			<====================== end keyboard.c ======================>
+**			<====================== end controls.c ======================>
 */
 void    *mandelbrot(void *tab);
 void    mandelbrot_pthread(t_fractol *fractol);
