@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/03/02 22:45:34 by alex             ###   ########.fr       */
+/*   Updated: 2020/03/04 19:39:32 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define FT_ABS(x) (((x) < 0) ? (-(x)) : (x))
+# define THREADS 10
 # define WIDTH 1200
 # define HEIGHT 800
 # define IMG_WIDTH 700
@@ -22,6 +22,7 @@
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define BLUE 0x000066
+# define IVKLEIN 0x3a75c4
 # define WHITE 0xFFFFFF
 #include <math.h>
 #include <stdlib.h>
@@ -29,21 +30,6 @@
 #include <pthread.h>
 #include "libft.h"
 #include "mlx.h"
-
-
-typedef struct		s_image
-{
-	void			*image;
-	char			*data_addr;
-	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
-}					t_image;
-
-typedef	struct		s_color
-{
-	int8_t			channel[4];
-}					t_color;
 
 typedef enum		e_bool
 {
@@ -57,25 +43,10 @@ typedef struct      s_complex
     double          im;
 }                   t_complex;
 
-
-typedef struct  s_point
+typedef struct s_colors
 {
-    int         x;
-    int         y;
-    unsigned    rgb;
-}               t_point;
-
-
-typedef struct s_mouse
-{
-    int         left_key;
-    int         right_key;
-    int         third_key;
-    int         x0;
-    int         y0;
-    int         x1;
-    int         y1;    
-}               t_mouse;
+    int         colors[25];
+}               t_colors;
 
 typedef struct s_fractol
 {
@@ -86,25 +57,30 @@ typedef struct s_fractol
     int         color;
     int         image_width;
     int         image_height;
-    int         zoom;
+    double         zoom;
     t_complex       min;
     t_complex       max;
     t_complex       c;
     t_complex       z;
+    t_complex       k;
     double         min_re;
     double         max_re;
     double         min_im;
     double         max_im;
     double         re_factor;
     double         im_factor;
-    double         c_im;
-    double         c_re;
-    double         z_re;
-    double         z_im;
+    // double         c_im;
+    // double         c_re;
+    // double         z_re;
+    // double         z_im;
     double         z_re2;
     double         z_im2;
+    double         offset_x;
+    double         offset_y;
+    int         julia_mouse;
     double      tmp;
-    int         y_max;
+    int         start;
+    int         end;
     void        *img_ptr;
     void        *mlx;
     void        *win;
@@ -129,6 +105,8 @@ t_complex	init_complex(double re, double im);
 /*
 **			<====================== start fractol.c ======================>
 */
+void        fract_type(t_fractol *fractol);
+void        fractol_init(t_fractol *fractol);
 void        ft_mlx_win_init(t_fractol *fractol);
 int         ft_name_fractol(char *av, t_fractol *fractol);
 /*
@@ -137,7 +115,8 @@ int         ft_name_fractol(char *av, t_fractol *fractol);
 /*
 **			<====================== start controls.c ======================>
 */
-int     key_press(int key, t_fractol *fractol);
+int         key_press(int key, t_fractol *fractol);
+int         mouse_hook(int key, int x, int y, t_fractol *fractol);
 
 /*
 **			<====================== end controls.c ======================>
@@ -145,5 +124,14 @@ int     key_press(int key, t_fractol *fractol);
 void    *mandelbrot(void *tab);
 void    mandelbrot_pthread(t_fractol *fractol);
 void    mandelbrot_init(t_fractol *fractol);
-void    mandelbrot_calc(t_fractol *fractol);
+void    mandelbrot_draw(t_fractol *fractol);
+/*
+**			<====================== start julia.c ======================>
+*/
+void        julia_draw(t_fractol *fractol);
+void        julia_init(t_fractol *fractol);
+int         julia_motion(int x, int y, t_fractol *fractol);
+/*
+**			<====================== end julia.c ======================>
+*/
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+         #
+#    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 11:13:26 by rmaxima           #+#    #+#              #
-#    Updated: 2019/10/01 12:51:01 by rmaxima          ###   ########.fr        #
+#    Updated: 2020/03/04 15:52:59 by user             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ ft_printbits.o ft_space.o
 all:	$(NAME)
 
 $(NAME):
-		$(CC) $(FLAGS) -c $(SRC)
-		ar rc $(NAME) $(OFILES)
-
+		@$(CC) $(FLAGS) -c $(SRC)
+		@ar rc $(NAME) $(OFILES)
+		@echo "$(GREEN).$(RESET)\c"
 clean:
 		/bin/rm -f $(OFILES)
 

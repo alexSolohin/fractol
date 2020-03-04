@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:55:55 by user              #+#    #+#             */
-/*   Updated: 2020/03/04 11:40:44 by alex             ###   ########.fr       */
+/*   Updated: 2020/03/04 19:56:39 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #include "fractol_key.h"
 #include <stdio.h>
 
-void    fract_calc(t_fractol *fractol)
+void    fract_type(t_fractol *fractol)
 {
     if (fractol->max_iteration < 0)
         fractol->max_iteration = 0;
     if (fractol->type == 1)
         mandelbrot_pthread(fractol);
     else if (fractol->type == 2)
-        printf("julia");
+        printf("s");
+        // julia_pthread(fractol);
 }
 
 int     ft_name_fractol(char *av, t_fractol *fractol)
@@ -41,10 +42,16 @@ int     ft_name_fractol(char *av, t_fractol *fractol)
 void    fractol_init(t_fractol *fractol)
 {
     if (fractol->type == 1)
-        mandelbrot_calc(fractol);
+    {
+        mandelbrot_init(fractol);
+        mandelbrot_draw(fractol);
+    }   
     else if (fractol->type == 2)
-        printf("julia");
-    // fract_calc(fractol);
+    {
+        julia_init(fractol);
+        julia_draw(fractol);
+    }
+    // fract_type(fractol);
 }
 
 void    ft_mlx_win_init(t_fractol *fractol)
@@ -68,14 +75,16 @@ int     main(int ac, char **av)
     {
         ft_mlx_win_init(fractol);
         fractol_init(fractol);
-        mlx_hook(fractol->win, 2, 0, key_press, fractol);
+        mlx_key_hook(fractol->win, key_press, fractol);
         mlx_hook(fractol->win, 17, 0, ft_close, fractol);
-        // mlx_hook(fractol->win, 4, 0, zoom, fractol);
+        if (fractol->type == 2)
+            mlx_hook(fractol->win, 6, 0, julia_motion, fractol);
+        mlx_hook(fractol->win, 4, 0, mouse_hook, fractol);
         mlx_loop(fractol->mlx);
     }
     else
     {
         printf("stop");
     }
-    
+    return (0);
 }

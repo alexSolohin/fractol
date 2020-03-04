@@ -9,7 +9,9 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 _SRCS = fractol.c \
 		mandelbrot.c \
-		controls.c utils.c
+		controls.c \
+		utils.c \
+		julia.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(_SRCS))
 _OBJS = $(_SRCS:%.c=%.o)
 OBJS = $(addprefix $(OBJS_DIR)/, $(_OBJS))

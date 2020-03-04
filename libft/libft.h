@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 11:47:02 by rmaxima           #+#    #+#             */
-/*   Updated: 2019/09/19 17:54:50 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/03/04 16:41:36 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define FT_ABS(X) (((X) < 0) ? (-(X)) : (X))
 
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+
 
 typedef struct		s_list
 {
