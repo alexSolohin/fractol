@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:02:42 by user              #+#    #+#             */
-/*   Updated: 2020/03/04 19:41:30 by user             ###   ########.fr       */
+/*   Updated: 2020/03/06 17:09:31 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,20 @@ void    put_pxl_to_img(t_fractol *fractol, int x, int y, int color)
     }
 }
 
+void    print()
+{
+    ft_putendl("Usage ./fractol <name>");
+	ft_putchar('\n');
+    ft_putendl("List of fractols:");
+	ft_putchar('\n');
+    ft_putendl("-mandelbrot");
+    ft_putendl("-julia");
+    ft_putendl("-burningship");
+    ft_putendl("-mandelbar");
+    ft_putendl("-celtic_mandelbrot");
+    ft_putendl("-celtic_mandelbar");
+    ft_putendl("-celtic_perpendicular");
+    ft_putendl("-perpendicular");
+    ft_putendl("-perpendicular_buffalo");
+	ft_putchar('\n');
+}

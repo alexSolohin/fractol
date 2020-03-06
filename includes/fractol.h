@@ -6,14 +6,14 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/03/04 19:39:32 by user             ###   ########.fr       */
+/*   Updated: 2020/03/06 18:13:30 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define THREADS 10
+# define THREADS 100
 # define WIDTH 1200
 # define HEIGHT 800
 # define IMG_WIDTH 700
@@ -24,10 +24,12 @@
 # define BLUE 0x000066
 # define IVKLEIN 0x3a75c4
 # define WHITE 0xFFFFFF
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <pthread.h>
+#include <math.h>
 #include "libft.h"
 #include "mlx.h"
 
@@ -99,6 +101,7 @@ typedef struct s_fractol
 int		    ft_close(void *param);
 void        put_pxl_to_img(t_fractol *fractol, int x, int y, int color);
 t_complex	init_complex(double re, double im);
+void        print();
 /*
 **			<====================== end util ======================>
 */
@@ -107,7 +110,7 @@ t_complex	init_complex(double re, double im);
 */
 void        fract_type(t_fractol *fractol);
 void        fractol_init(t_fractol *fractol);
-void        ft_mlx_win_init(t_fractol *fractol);
+void        ft_mlx_win_init(char *name, t_fractol *fractol);
 int         ft_name_fractol(char *av, t_fractol *fractol);
 /*
 **			<====================== end fractol.c ======================>
@@ -121,17 +124,87 @@ int         mouse_hook(int key, int x, int y, t_fractol *fractol);
 /*
 **			<====================== end controls.c ======================>
 */
-void    *mandelbrot(void *tab);
-void    mandelbrot_pthread(t_fractol *fractol);
-void    mandelbrot_init(t_fractol *fractol);
-void    mandelbrot_draw(t_fractol *fractol);
+/*
+**			<====================== start mandelbrot.c ======================>
+*/
+void        *mandelbrot(void *tab);
+void        mandelbrot_pthread(t_fractol *fractol);
+void        mandelbrot_init(t_fractol *fractol);
+void        mandelbrot_draw(t_fractol *fractol);
+/*
+**			<====================== end mandelbrot.c ======================>
+*/
 /*
 **			<====================== start julia.c ======================>
 */
 void        julia_draw(t_fractol *fractol);
 void        julia_init(t_fractol *fractol);
+void        julia_pthread(t_fractol *fractol);
 int         julia_motion(int x, int y, t_fractol *fractol);
 /*
 **			<====================== end julia.c ======================>
+*/
+/*
+**			<====================== start burningship.c ======================>
+*/
+void        burningship_init(t_fractol *fractol);
+void        burningship_draw(t_fractol *fractol);
+void        burningship_pthread(t_fractol *fractol);
+/*
+**			<====================== end burningship.c ======================>
+*/
+/*
+**			<====================== start mandelbar.c ======================>
+*/
+void        mandelbar_init(t_fractol *fractol);
+void        mandelbar_draw(t_fractol *fractol);
+void        mandelbar_pthread(t_fractol * fractol);
+/*
+**			<====================== end mandelbar.c ======================>
+*/
+/*
+**			<====================== start celtic_mandelbrot.c ======================>
+*/
+void        celtic_mandelbrot_init(t_fractol *fractol);
+void        celtic_mandelbrot_draw(t_fractol *fractol);
+void        celtic_mandelbrot_pthread(t_fractol *fractol);
+/*
+**			<====================== end celtic_mandelbrot.c ======================>
+*/
+/*
+**			<====================== start celtic_mandelbar.c ======================>
+*/
+void        celtic_mandelbar_init(t_fractol *fractol);
+void        celtic_mandelbar_draw(t_fractol *fractol);
+void        celtic_mandelbar_pthread(t_fractol *fractol);
+/*
+**			<====================== end celtic_mandelbar.c ======================>
+*/
+/*
+**			<====================== start celtic_perpendicular.c ======================>
+*/
+void        celtic_perpendicular_init(t_fractol *fractol);
+void        celtic_perpendicular_draw(t_fractol *fractol);
+void        celtic_perpendicular_pthread(t_fractol *fractol);
+/*
+**			<====================== end celtic_perpendicular.c ======================>
+*/
+/*
+**			<====================== start perpendicular.c ======================>
+*/
+void        perpendicular_init(t_fractol *fractol);
+void        perpendicular_draw(t_fractol *fractol);
+void        perpendicular_pthread(t_fractol *fractol);
+/*
+**			<====================== end perpendicular.c ======================>
+*/
+/*
+**			<====================== start perpendicular_buffalo.c ======================>
+*/
+void        perpendicular_buffalo_init(t_fractol *fractol);
+void        perpendicular_buffalo_draw(t_fractol *fractol);
+void        perpendicular_buffalo_pthread(t_fractol *fractol);
+/*
+**			<====================== end perpendicular_buffalo.c ======================>
 */
 #endif

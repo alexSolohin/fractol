@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/04 16:38:41 by user              #+#    #+#             */
-/*   Updated: 2020/03/06 15:33:07 by user             ###   ########.fr       */
+/*   Created: 2020/03/06 15:34:52 by user              #+#    #+#             */
+/*   Updated: 2020/03/06 15:41:49 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int julia_motion(int x, int y, t_fractol *fractol)
-{
-    if (fractol->julia_mouse == 1)
-    {
-        fractol->k = init_complex(
-            4 * ((double)x / WIDTH - 0.5),
-            4 * ((double)(HEIGHT - y) / HEIGHT - 0.5));
-    }
-    fract_type(fractol);
-    return (0);
-}
-
-void    julia_init(t_fractol *fractol)
+void    burningship_init(t_fractol *fractol)
 {
     fractol->max_iteration = 50;
     fractol->min.re = -2.0;
@@ -32,22 +20,18 @@ void    julia_init(t_fractol *fractol)
     fractol->max.re = 2.0;
     fractol->max.im = fractol->min.im + 
         (fractol->max.re - fractol->min.re) * HEIGHT / WIDTH;
-    fractol->k = init_complex(-0.4, 0.6);
-    fractol->julia_mouse = 1;
-    // fractol->c.re = 0.285;
-    // fractol->c.im = 0.01;
     fractol->color = 265;
 }
 
-void    julia_draw(t_fractol *fractol)
+void    burningship_draw(t_fractol *fractol)
 {
     fractol->re_factor = (fractol->max.re - fractol->min.re) / (WIDTH - 1);
     fractol->im_factor = (fractol->max.im - fractol->min.im) / (HEIGHT - 1);
-
+    
     fractol->y = fractol->start;
     while (fractol->y < fractol->end)
     {
-        fractol->c.im = fractol->max.im - (fractol->y * fractol->im_factor);        
+        fractol->c.im = fractol->max.im - (fractol->y * fractol->im_factor);
         fractol->x = 0;
         while (fractol->x < WIDTH)
         {
@@ -65,8 +49,8 @@ void    julia_draw(t_fractol *fractol)
                     fractol->inside = 0;
                     break;
                 }
-                fractol->z.im = 2 * fractol->z.re * fractol->z.im + fractol->k.im;
-                fractol->z.re = fractol->z_re2 - fractol->z_im2 + fractol->k.re;
+                fractol->z.im = -2 * fabs(fractol->z.re * fractol->z.im) + fractol->c.im;
+                fractol->z.re = fractol->z_re2 - fractol->z_im2 + fractol->c.re;
                 fractol->iteration++;
             }
             if (fractol->inside)
@@ -76,10 +60,10 @@ void    julia_draw(t_fractol *fractol)
             fractol->x++;
         }
         fractol->y++;
-    }   
+    }
 }
 
-void    julia_pthread(t_fractol *fractol)
+void    burningship_pthread(t_fractol *fractol)
 {
     t_fractol   tab[THREADS];
     pthread_t   threads[THREADS];
@@ -91,12 +75,14 @@ void    julia_pthread(t_fractol *fractol)
         tab[i] = *fractol;
         tab[i].start = i * (HEIGHT / THREADS);
         tab[i].end = (i + 1) * (HEIGHT / THREADS);
-        if (pthread_create(&threads[i], NULL, (void *(*)(void *))julia_draw, (void *)&tab[i]))
+        if (pthread_create(&threads[i], NULL, (void *(*)(void *))burningship_draw, (void *)&tab[i]))
             exit(0);
         i++;
     }
     while (i-- > 0)
+    {
         if (pthread_join(threads[i], NULL))
             exit(0);
-    mlx_put_image_to_window(fractol->mlx, fractol->win, fractol->img, 0, 0); 
+    }
+    mlx_put_image_to_window(fractol->mlx, fractol->win, fractol->img, 0, 0);
 }

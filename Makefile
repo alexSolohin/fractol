@@ -11,7 +11,14 @@ _SRCS = fractol.c \
 		mandelbrot.c \
 		controls.c \
 		utils.c \
-		julia.c
+		julia.c \
+		burningship.c \
+		mandelbar.c \
+		celtic_mandelbrot.c \
+		celtic_mandelbar.c \
+		celtic_perpendicular.c \
+		perpendicular.c \
+		perpendicular_buffalo.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(_SRCS))
 _OBJS = $(_SRCS:%.c=%.o)
 OBJS = $(addprefix $(OBJS_DIR)/, $(_OBJS))

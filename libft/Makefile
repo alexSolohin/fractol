@@ -6,7 +6,7 @@
 #    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 11:13:26 by rmaxima           #+#    #+#              #
-#    Updated: 2020/03/04 15:52:59 by user             ###   ########.fr        #
+#    Updated: 2020/03/06 17:10:12 by user             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,9 @@ $(NAME):
 		@ar rc $(NAME) $(OFILES)
 		@echo "$(GREEN).$(RESET)\c"
 clean:
-		/bin/rm -f $(OFILES)
+		@/bin/rm -f $(OFILES)
 
 fclean: clean
-		/bin/rm -f $(NAME)
+		@/bin/rm -f $(NAME)
 
 re:		fclean all
