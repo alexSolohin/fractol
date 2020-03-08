@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/03/06 17:51:34 by user             ###   ########.fr       */
+/*   Updated: 2020/03/08 17:49:03 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int     key_press(int key, t_fractol *fractol)
         fractol->max_iteration -= 5;
     else if (key == MAIN_PAD_MORE)
         fractol->max_iteration += 5;
-    else if (key == ARROW_DOWN || key == ARROW_LEFT || key == ARROW_LEFT ||
+    else if (key == ARROW_DOWN || key == ARROW_LEFT || key == ARROW_RIGHT ||
              key == ARROW_UP)
         move(key, fractol);
     fract_type(fractol);
@@ -123,10 +123,12 @@ int     key_press(int key, t_fractol *fractol)
 
 int     mouse_hook(int key, int x, int y, t_fractol *fractol)
 {
-    if (key == MOUSE_SCROLL_UP || key == MOUSE_LEFT_BUTTON)
+    if (key == MOUSE_SCROLL_UP || key == MOUSE_RIGHT_BUTTON)
         zoom(x, y, fractol);
-    else if (key == MOUSE_SCROLL_DOWN || key == MOUSE_RIGHT_BUTTON)
+    else if (key == MOUSE_SCROLL_DOWN || key == MOUSE_LEFT_BUTTON)
         zoom_out(x, y, fractol);
+    if (key == MOUSE_RIGHT_BUTTON && in_button(x, y))
+        fractol->button = 1;
     fract_type(fractol);
     return (0);
 }

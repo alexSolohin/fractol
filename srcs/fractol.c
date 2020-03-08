@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:55:55 by user              #+#    #+#             */
-/*   Updated: 2020/03/06 18:25:13 by user             ###   ########.fr       */
+/*   Updated: 2020/03/08 17:50:44 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void    fract_type(t_fractol *fractol)
         perpendicular_pthread(fractol);
     else if (fractol->type == 9)
         perpendicular_buffalo_pthread(fractol);
+    draw_button(fractol);
+    if (fractol->button)
+        draw_help(fractol);
 }
 
 int     ft_name_fractol(char *av, t_fractol *fractol)
@@ -129,14 +132,15 @@ int     main(int ac, char **av)
             ft_mlx_win_init(av[1], fractol);
             fractol_init(fractol);
             ft_init_hook(fractol);
+            draw_button(fractol);
             mlx_loop(fractol->mlx);
         
-        if (!(ft_name_fractol(av[2], fractol)))
-            exit(0);
-        ft_mlx_win_init(av[2], fractol);
-        fractol_init(fractol);
-        ft_init_hook(fractol);
-        mlx_loop(fractol->mlx);
+        // if (!(ft_name_fractol(av[2], fractol)))
+        //     exit(0);
+        // ft_mlx_win_init(av[2], fractol);
+        // fractol_init(fractol);
+        // ft_init_hook(fractol);
+        // mlx_loop(fractol->mlx);
         
         
     }

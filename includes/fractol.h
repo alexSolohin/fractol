@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/03/06 18:13:30 by user             ###   ########.fr       */
+/*   Updated: 2020/03/08 17:48:54 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # define IMG_WIDTH 700
 # define IMG_HEIGHT 400
 # define ENDIAN 0
+# define MENU_W WIDTH - 200
+# define BUTTONS_NUM 11
+# define B_H 35
+# define B_TEXT_COLOR 0xDD999999
 # define RED 0xFF0000
 # define GREEN 0xFF00
 # define BLUE 0x000066
@@ -75,6 +79,7 @@ typedef struct s_fractol
     // double         c_re;
     // double         z_re;
     // double         z_im;
+    int             button;
     double         z_re2;
     double         z_im2;
     double         offset_x;
@@ -207,4 +212,6 @@ void        perpendicular_buffalo_pthread(t_fractol *fractol);
 /*
 **			<====================== end perpendicular_buffalo.c ======================>
 */
+void        draw_button(t_fractol *fractol);
+int        in_button(int x, int y);
 #endif
