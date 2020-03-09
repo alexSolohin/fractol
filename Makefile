@@ -19,7 +19,8 @@ _SRCS = fractol.c \
 		celtic_perpendicular.c \
 		perpendicular.c \
 		perpendicular_buffalo.c \
-		menu.c
+		menu.c \
+		fractol_init.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(_SRCS))
 _OBJS = $(_SRCS:%.c=%.o)
 OBJS = $(addprefix $(OBJS_DIR)/, $(_OBJS))
@@ -31,9 +32,9 @@ BLINK = \033[5m
 RESET = \033[0m
 
 all: $(NAME)
-	#@say -v Fred hello, my name is Stephen Hawking, `date "+DATE: %Y-%m-%d"`
-	#@say -v Fred $(NAME) was created
-	# @echo "$(NAME): $(GREEN)$(NAME) was created"
+	@say -v Fred hello, my name is Stephen Hawking, `date "+DATE: %Y-%m-%d"`
+	@say -v Fred $(NAME) was created
+	@echo "\n$(NAME): $(GREEN)$(NAME) was created"
 
 $(NAME): $(OBJS)
 	@make -C $(LIBPATH)
@@ -43,17 +44,18 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p objs
 	@echo "$(GREEN).$(RESET)\c"
 	@$(CC) -c -o $@ $< $(CFLAGS) -I$(IDIR) -I$(LIBPATH) -I$(MINILIB_PATH)
-	
 
 clean:
-	#@say -v Fred Go then, there are other worlds than these.
+	@say -v Fred Go then, there are other worlds than these.
 	@rm -f $(OBJS)
 	@make -C $(LIBPATH) clean
+	@echo "$(GREEN).$(RESET)\c"
+	@echo "\n$(NAME): $(RED)$(NAME) was clean"
 
 fclean: clean
 	@rm -f $(NAME)
 	@make -C $(LIBPATH) fclean
-	
+
 re: fclean all
 
 .PHONY: all clean fclean re

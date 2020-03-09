@@ -6,7 +6,7 @@
 #    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/12 11:13:26 by rmaxima           #+#    #+#              #
-#    Updated: 2020/03/06 17:10:12 by user             ###   ########.fr        #
+#    Updated: 2020/03/09 20:41:18 by user             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ ft_putnbr.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o \
 ft_strtrim.o ft_itoa.o ft_strsplit.o ft_lstnew.o ft_lstdelone.o ft_lstdel.o \
 ft_lstadd.o ft_lstiter.o ft_lstmap.o ft_strrev.o ft_range.o ft_swap.o \
 ft_printbits.o ft_space.o
-
 
 all:	$(NAME)
 
