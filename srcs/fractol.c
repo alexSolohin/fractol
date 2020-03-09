@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:55:55 by user              #+#    #+#             */
-/*   Updated: 2020/03/08 17:50:44 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/03/09 15:27:22 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,16 @@ int     main(int ac, char **av)
     //     exit(0);
     if (ac >= 2)
     {
-        i = 1;  
+        i = 1;
             if (!(ft_name_fractol(av[1], fractol)))
                 exit(0);
             ft_mlx_win_init(av[1], fractol);
+            fractol->button = 0;
             fractol_init(fractol);
             ft_init_hook(fractol);
             draw_button(fractol);
             mlx_loop(fractol->mlx);
-        
+
         // if (!(ft_name_fractol(av[2], fractol)))
         //     exit(0);
         // ft_mlx_win_init(av[2], fractol);

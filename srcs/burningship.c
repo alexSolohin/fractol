@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:34:52 by user              #+#    #+#             */
-/*   Updated: 2020/03/06 15:41:49 by user             ###   ########.fr       */
+/*   Updated: 2020/03/09 15:12:41 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void    burningship_init(t_fractol *fractol)
 {
-    fractol->max_iteration = 50;
+    fractol->max_iteration = 100;
     fractol->min.re = -2.0;
     fractol->min.im = -1.5;
     fractol->max.re = 2.0;
     fractol->max.im = fractol->min.im + 
         (fractol->max.re - fractol->min.re) * HEIGHT / WIDTH;
-    fractol->color = 265;
+    fractol->color = 0x042245;
 }
 
 void    burningship_draw(t_fractol *fractol)

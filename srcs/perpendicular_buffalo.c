@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:36:30 by user              #+#    #+#             */
-/*   Updated: 2020/03/06 16:43:23 by user             ###   ########.fr       */
+/*   Updated: 2020/03/09 15:15:09 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    perpendicular_buffalo_init(t_fractol *fractol)
 {
-    fractol->max_iteration = 50;
+    fractol->max_iteration = 100;
     fractol->min.re = -2.0;
     fractol->min.im = -1.5;
     fractol->max.re = 2.0;

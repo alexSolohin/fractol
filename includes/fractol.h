@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/03/08 17:48:54 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/03/09 15:16:41 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,13 @@ void        perpendicular_buffalo_pthread(t_fractol *fractol);
 /*
 **			<====================== end perpendicular_buffalo.c ======================>
 */
+/*
+**			<====================== start menu.c ======================>
+*/
 void        draw_button(t_fractol *fractol);
-int        in_button(int x, int y);
+int         in_button(int x, int y);
+void        draw_help(t_fractol *fractol);
+/*
+**			<====================== end menu.c ======================>
+*/
 #endif

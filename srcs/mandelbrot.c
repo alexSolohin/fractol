@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 15:18:54 by user              #+#    #+#             */
-/*   Updated: 2020/03/08 16:46:51 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/03/09 15:21:30 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 
 void    mandelbrot_init(t_fractol *fractol)
 {
-    fractol->max_iteration = 50;
+    fractol->max_iteration = 100;
     fractol->min.re = -2.5;
     fractol->min.im = -1.5;
     fractol->max.re = 2.0;
     fractol->max.im = fractol->min.im + 
         (fractol->max.re - fractol->min.re) * HEIGHT / WIDTH;
     fractol->color = 265;
+    
 }
 
 void    mandelbrot_draw(t_fractol *fractol)
@@ -48,7 +49,7 @@ void    mandelbrot_draw(t_fractol *fractol)
                 if (fractol->z_re2 + fractol->z_im2 > 4)
                 {
                     fractol->inside = 0;
-                    break;
+                    break ;
                 }
                 fractol->z.im = 2 * fractol->z.re *fractol->z.im + fractol->c.im;
                 fractol->z.re = fractol->z_re2 - fractol->z_im2 + fractol->c.re;

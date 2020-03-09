@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/03/08 17:49:03 by rmaxima          ###   ########.fr       */
+/*   Updated: 2020/03/09 15:10:40 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void     colors(int key, t_fractol *fractol)
     else if (key == MAIN_PAD_5)
         fractol->color = 0x172b27;
     else if (key == MAIN_PAD_6)
-        fractol->color = 0x92a8d1;
+        fractol->color = 0x630404;
     else if (key == MAIN_PAD_7)
         fractol->color = 0xC15887;
     else if (key == MAIN_PAD_8)
@@ -96,7 +96,7 @@ void     colors(int key, t_fractol *fractol)
     else if (key == MAIN_PAD_9)
         fractol->color = 0xeff0f1;
     else if (key == MAIN_PAD_0)
-        fractol->color = 0x43457f;
+        fractol->color = 0xb3ff00;
 }
 
 int     key_press(int key, t_fractol *fractol)
@@ -125,10 +125,11 @@ int     mouse_hook(int key, int x, int y, t_fractol *fractol)
 {
     if (key == MOUSE_SCROLL_UP || key == MOUSE_RIGHT_BUTTON)
         zoom(x, y, fractol);
-    else if (key == MOUSE_SCROLL_DOWN || key == MOUSE_LEFT_BUTTON)
+    else if ((key == MOUSE_SCROLL_DOWN || key == MOUSE_LEFT_BUTTON) && 
+                !in_button(x, y) && y > 0)
         zoom_out(x, y, fractol);
-    if (key == MOUSE_RIGHT_BUTTON && in_button(x, y))
-        fractol->button = 1;
+    if (key == MOUSE_LEFT_BUTTON && in_button(x, y))
+        fractol->button ^= 1;
     fract_type(fractol);
     return (0);
 }
