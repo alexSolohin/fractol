@@ -48,7 +48,8 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 clean:
 	@say -v Fred Go then, there are other worlds than these.
 	@rm -f $(OBJS)
-	@make -C $(LIBPATH) clean
+	@rmdir $(OBJS_DIR)
+	@make -C $(LIBPATH) fclean
 	@echo "$(GREEN).$(RESET)\c"
 	@echo "\n$(NAME): $(RED)$(NAME) was clean"
 
