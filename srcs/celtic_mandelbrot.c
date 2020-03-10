@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   celtic_mandelbrot.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:00:32 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:31:31 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:57:35 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		celtic_mandelbrot(t_fractol *fractol)
 		if (fractol->z_re2 + fractol->z_im2 > 4)
 		{
 			fractol->inside = 0;
-			break;
+			break ;
 		}
 		fractol->z.im = 2 * fractol->z.re * fractol->z.im + fractol->c.im;
 		fractol->z.re = fabs(fractol->z_re2 - fractol->z_im2) + fractol->c.re;
@@ -80,7 +80,8 @@ void			celtic_mandelbrot_pthread(t_fractol *fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))celtic_mandelbrot_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))celtic_mandelbrot_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}

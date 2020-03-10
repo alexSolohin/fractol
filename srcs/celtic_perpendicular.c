@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   celtic_perpendicular.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:20:35 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:31:22 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:57:14 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,26 @@ void			celtic_perpendicular_init(t_fractol *fractol)
 static void		celtic_perpendicular(t_fractol *fractol)
 {
 	fractol->iteration = 0;
-			while (fractol->iteration < fractol->max_iteration)
-			{
-				fractol->z_re2 = fractol->z.re * fractol->z.re;
-				fractol->z_im2 = fractol->z.im * fractol->z.im;
-				if (fractol->z_re2 + fractol->z_im2 > 4)
-				{
-					fractol->inside = 0;
-					break;
-				}
-				fractol->z.im = -2 * fabs(fractol->z.re) * fractol->z.im + fractol->c.im;
-				fractol->z.re = fabs(fractol->z_re2 - fractol->z_im2) + fractol->c.re;
-				fractol->iteration++;
-			}
+	while (fractol->iteration < fractol->max_iteration)
+	{
+		fractol->z_re2 = fractol->z.re * fractol->z.re;
+		fractol->z_im2 = fractol->z.im * fractol->z.im;
+		if (fractol->z_re2 + fractol->z_im2 > 4)
+		{
+			fractol->inside = 0;
+			break ;
+		}
+		fractol->z.im = -2 * fabs(fractol->z.re)
+			* fractol->z.im + fractol->c.im;
+		fractol->z.re = fabs(fractol->z_re2 - fractol->z_im2) + fractol->c.re;
+		fractol->iteration++;
+	}
 }
 
 void			celtic_perpendicular_draw(t_fractol *fractol)
 {
 	fractol->re_factor = (fractol->max.re - fractol->min.re) / (WIDTH - 1);
 	fractol->im_factor = (fractol->max.im - fractol->min.im) / (HEIGHT - 1);
-
 	fractol->y = fractol->start;
 	while (fractol->y < fractol->end)
 	{
@@ -61,7 +61,8 @@ void			celtic_perpendicular_draw(t_fractol *fractol)
 			if (fractol->inside)
 				put_pxl_to_img(fractol, fractol->x, fractol->y, WHITE);
 			else
-				put_pxl_to_img(fractol, fractol->x, fractol->y, (fractol->color * fractol->iteration));
+				put_pxl_to_img(fractol, fractol->x, fractol->y,
+					(fractol->color * fractol->iteration));
 			fractol->x++;
 		}
 		fractol->y++;
@@ -80,7 +81,8 @@ void			celtic_perpendicular_pthread(t_fractol *fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))celtic_perpendicular_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))celtic_perpendicular_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}

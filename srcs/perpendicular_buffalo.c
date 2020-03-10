@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   perpendicular_buffalo.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:36:30 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:21:05 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:38:59 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static void		perpendicular_buffalo(t_fractol *fractol)
 		if (fractol->z_re2 + fractol->z_im2 > 4)
 		{
 			fractol->inside = 0;
-			break;
+			break ;
 		}
-		fractol->z.im = -2 * fractol->z.re * fabs(fractol->z.im) + fractol->c.im;
+		fractol->z.im = -2 * fractol->z.re * fabs(fractol->z.im)
+			+ fractol->c.im;
 		fractol->z.re = fabs(fractol->z_re2 - fractol->z_im2) + fractol->c.re;
 		fractol->iteration++;
 	}
@@ -45,7 +46,6 @@ void			perpendicular_buffalo_draw(t_fractol *fractol)
 {
 	fractol->re_factor = (fractol->max.re - fractol->min.re) / (WIDTH - 1);
 	fractol->im_factor = (fractol->max.im - fractol->min.im) / (HEIGHT - 1);
-
 	fractol->y = fractol->start;
 	while (fractol->y < fractol->end)
 	{
@@ -61,7 +61,8 @@ void			perpendicular_buffalo_draw(t_fractol *fractol)
 			if (fractol->inside)
 				put_pxl_to_img(fractol, fractol->x, fractol->y, WHITE);
 			else
-				put_pxl_to_img(fractol, fractol->x, fractol->y, (fractol->color * fractol->iteration));
+				put_pxl_to_img(fractol, fractol->x, fractol->y,
+					(fractol->color * fractol->iteration));
 			fractol->x++;
 		}
 		fractol->y++;
@@ -80,7 +81,8 @@ void			perpendicular_buffalo_pthread(t_fractol *fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))perpendicular_buffalo_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))perpendicular_buffalo_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}

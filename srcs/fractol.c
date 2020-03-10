@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:55:55 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:24:15 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:55:29 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ void	ft_mlx_win_init(char *name, t_fractol *fractol)
 	fractol->pixels_arr = mlx_get_data_addr(fractol->img,
 		&fractol->bits_per_pixel, &fractol->line_size, &fractol->endian);
 }
-
-
 
 int		main(int ac, char **av)
 {

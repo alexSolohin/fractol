@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   celtic_mandelbar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 16:13:44 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:14:17 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:58:06 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void		celtic_mandelbar(t_fractol *fractol)
 		if (fractol->z_re2 + fractol->z_im2 > 4)
 		{
 			fractol->inside = 0;
-			break;
-			}
+			break ;
+		}
 		fractol->z.im = -2 * fractol->z.re * fractol->z.im + fractol->c.im;
 		fractol->z.re = fabs(fractol->z_re2 - fractol->z_im2) + fractol->c.re;
 		fractol->iteration++;
@@ -45,7 +45,6 @@ void			celtic_mandelbar_draw(t_fractol *fractol)
 {
 	fractol->re_factor = (fractol->max.re - fractol->min.re) / (WIDTH - 1);
 	fractol->im_factor = (fractol->max.im - fractol->min.im) / (HEIGHT - 1);
-
 	fractol->y = fractol->start;
 	while (fractol->y < fractol->end)
 	{
@@ -81,7 +80,8 @@ void			celtic_mandelbar_pthread(t_fractol *fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))celtic_mandelbar_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))celtic_mandelbar_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}

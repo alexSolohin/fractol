@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:02:42 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 19:46:29 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:41:36 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ void		put_pxl_to_img(t_fractol *fractol, int x, int y, int color)
 	if (fractol->x < WIDTH && fractol->y < WIDTH)
 	{
 		color = mlx_get_color_value(fractol->mlx, color);
-		ft_memcpy(fractol->pixels_arr + 4 * WIDTH * y + x * 4, &color, sizeof(int));
+		ft_memcpy(fractol->pixels_arr + 4 * WIDTH * y + x * 4, &color,
+			sizeof(int));
 	}
 }
 
-void		print()
+void		print(void)
 {
 	ft_putendl("Usage ./fractol <name>");
 	ft_putchar('\n');

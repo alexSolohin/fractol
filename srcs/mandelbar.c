@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:48:06 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:30:44 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:52:29 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void		mandelbar(t_fractol *fractol)
 		if (fractol->z_re2 + fractol->z_im2 > 4)
 		{
 			fractol->inside = 0;
-			break;
+			break ;
 		}
-		fractol->z.im = -2 * fractol->z.re *fractol->z.im + fractol->c.im;
+		fractol->z.im = -2 * fractol->z.re * fractol->z.im + fractol->c.im;
 		fractol->z.re = fractol->z_re2 - fractol->z_im2 + fractol->c.re;
 		fractol->iteration++;
 	}
@@ -60,14 +60,15 @@ void			mandelbar_draw(t_fractol *fractol)
 			if (fractol->inside)
 				put_pxl_to_img(fractol, fractol->x, fractol->y, WHITE);
 			else
-				put_pxl_to_img(fractol, fractol->x, fractol->y, (fractol->color * fractol->iteration));
+				put_pxl_to_img(fractol, fractol->x, fractol->y,
+					(fractol->color * fractol->iteration));
 			fractol->x++;
 		}
 		fractol->y++;
 	}
 }
 
-void			mandelbar_pthread(t_fractol * fractol)
+void			mandelbar_pthread(t_fractol *fractol)
 {
 	t_fractol	tab[THREADS];
 	pthread_t	threads[THREADS];
@@ -79,7 +80,8 @@ void			mandelbar_pthread(t_fractol * fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))mandelbar_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))mandelbar_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}

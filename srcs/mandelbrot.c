@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 19:47:25 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:18:47 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:51:31 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 
 void			mandelbrot_init(t_fractol *fractol)
 {
@@ -22,7 +21,6 @@ void			mandelbrot_init(t_fractol *fractol)
 	fractol->max.im = fractol->min.im +
 		(fractol->max.re - fractol->min.re) * HEIGHT / WIDTH;
 	fractol->color = 265;
-
 }
 
 static void		mandelbrot(t_fractol *fractol)
@@ -36,7 +34,7 @@ static void		mandelbrot(t_fractol *fractol)
 			fractol->inside = 0;
 			break ;
 		}
-		fractol->z.im = 2 * fractol->z.re *fractol->z.im + fractol->c.im;
+		fractol->z.im = 2 * fractol->z.re * fractol->z.im + fractol->c.im;
 		fractol->z.re = fractol->z_re2 - fractol->z_im2 + fractol->c.re;
 		fractol->iteration++;
 	}
@@ -62,7 +60,8 @@ void			mandelbrot_draw(t_fractol *fractol)
 			if (fractol->inside)
 				put_pxl_to_img(fractol, fractol->x, fractol->y, WHITE);
 			else
-				put_pxl_to_img(fractol, fractol->x, fractol->y, (fractol->color * fractol->iteration));
+				put_pxl_to_img(fractol, fractol->x, fractol->y,
+					(fractol->color * fractol->iteration));
 			fractol->x++;
 		}
 		fractol->y++;
@@ -71,9 +70,9 @@ void			mandelbrot_draw(t_fractol *fractol)
 
 void			mandelbrot_pthread(t_fractol *fractol)
 {
-	t_fractol   tab[THREADS];
-	pthread_t   threads[THREADS];
-	int i;
+	t_fractol	tab[THREADS];
+	pthread_t	threads[THREADS];
+	int			i;
 
 	i = 0;
 	while (i < THREADS)
@@ -81,7 +80,8 @@ void			mandelbrot_pthread(t_fractol *fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))mandelbrot_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))mandelbrot_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}

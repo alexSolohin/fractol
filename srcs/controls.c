@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 18:01:16 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:28:27 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:54:36 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 static int		zoom(int x, int y, t_fractol *fractol)
 {
-	t_complex mouse;
-	double	  i;
+	t_complex	mouse;
+	double		i;
 
 	mouse = init_complex(
 		(double)x / (WIDTH / (fractol->max.re - fractol->min.re))
@@ -33,10 +33,10 @@ static int		zoom(int x, int y, t_fractol *fractol)
 	return (0);
 }
 
-static int	 zoom_out(int x, int y, t_fractol *fractol)
+static int		zoom_out(int x, int y, t_fractol *fractol)
 {
-	t_complex mouse;
-	double	  i;
+	t_complex	mouse;
+	double		i;
 
 	mouse = init_complex(
 		(double)x / (WIDTH / (fractol->max.re - fractol->min.re))
@@ -75,7 +75,7 @@ static void		move(int key, t_fractol *fractol)
 	}
 }
 
-int		key_press(int key, t_fractol *fractol)
+int				key_press(int key, t_fractol *fractol)
 {
 	if (key == MAIN_PAD_ESC)
 		exit(0);
@@ -91,13 +91,13 @@ int		key_press(int key, t_fractol *fractol)
 	else if (key == MAIN_PAD_MORE)
 		fractol->max_iteration += 5;
 	else if (key == ARROW_DOWN || key == ARROW_LEFT || key == ARROW_RIGHT ||
-			 key == ARROW_UP)
+			key == ARROW_UP)
 		move(key, fractol);
 	fract_type(fractol);
 	return (0);
 }
 
-int		mouse_hook(int key, int x, int y, t_fractol *fractol)
+int				mouse_hook(int key, int x, int y, t_fractol *fractol)
 {
 	if (key == MOUSE_SCROLL_UP || key == MOUSE_RIGHT_BUTTON)
 		zoom(x, y, fractol);

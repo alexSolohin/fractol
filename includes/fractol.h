@@ -3,38 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:10:40 by rmaxima           #+#    #+#             */
-/*   Updated: 2020/03/09 20:24:53 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:36:12 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define THREADS 100
-# define WIDTH 1200
-# define HEIGHT 800
-# define IMG_WIDTH 700
-# define IMG_HEIGHT 400
-# define ENDIAN 0
-# define MENU_W WIDTH - 200
-# define BUTTONS_NUM 11
-# define B_H 35
-# define B_TEXT_COLOR 0xDD999999
-# define RED 0xFF0000
-# define GREEN 0xFF00
-# define BLUE 0x000066
-# define IVKLEIN 0x3a75c4
-# define WHITE 0xFFFFFF
+# define THREADS	4
+# define WIDTH		1200
+# define HEIGHT		800
+# define IMG_WIDTH	700
+# define IMG_HEIGHT	400
+# define ENDIAN		0
+# define B_H 		35
+# define RED 		0xFF0000
+# define GREEN 		0xFF00
+# define BLUE 		0x000066
+# define IVKLEIN 	0x3a75c4
+# define WHITE 		0xFFFFFF
 
-#include <math.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <pthread.h>
-#include "libft.h"
-#include "mlx.h"
+# include <math.h>
+# include <stdlib.h>
+# include <stdint.h>
+# include <pthread.h>
+# include "libft.h"
+# include "mlx.h"
 
 typedef enum		e_bool
 {
@@ -44,14 +41,9 @@ typedef enum		e_bool
 
 typedef struct		s_complex
 {
-    double			re;
-    double			im;
+	double			re;
+	double			im;
 }					t_complex;
-
-typedef struct		s_colors
-{
-    int				colors[25];
-}					t_colors;
 
 typedef struct		s_fractol
 {
@@ -161,39 +153,39 @@ void				burningship_pthread(t_fractol *fractol);
 */
 void				mandelbar_init(t_fractol *fractol);
 void				mandelbar_draw(t_fractol *fractol);
-void				mandelbar_pthread(t_fractol * fractol);
+void				mandelbar_pthread(t_fractol *fractol);
 /*
-**			<====================== end mandelbar.c ======================>
+**			<====================== end mandelbar.c ==========================>
 */
 /*
-**			<====================== start celtic_mandelbrot.c ======================>
+**			<====================== start celtic_mandelbrot.c ================>
 */
 void				celtic_mandelbrot_init(t_fractol *fractol);
 void				celtic_mandelbrot_draw(t_fractol *fractol);
 void				celtic_mandelbrot_pthread(t_fractol *fractol);
 /*
-**			<====================== end celtic_mandelbrot.c ======================>
+**			<====================== end celtic_mandelbrot.c ===================>
 */
 /*
-**			<====================== start celtic_mandelbar.c ======================>
+**			<====================== start celtic_mandelbar.c =================>
 */
 void				celtic_mandelbar_init(t_fractol *fractol);
 void				celtic_mandelbar_draw(t_fractol *fractol);
 void				celtic_mandelbar_pthread(t_fractol *fractol);
 /*
-**			<====================== end celtic_mandelbar.c ======================>
+**			<====================== end celtic_mandelbar.c ===================>
 */
 /*
-**			<====================== start celtic_perpendicular.c ======================>
+**			<====================== start celtic_perpendicular.c ==============>
 */
 void				celtic_perpendicular_init(t_fractol *fractol);
 void				celtic_perpendicular_draw(t_fractol *fractol);
 void				celtic_perpendicular_pthread(t_fractol *fractol);
 /*
-**			<====================== end celtic_perpendicular.c ======================>
+**			<====================== end celtic_perpendicular.c ================>
 */
 /*
-**			<====================== start perpendicular.c ======================>
+**			<====================== start perpendicular.c ====================>
 */
 void				perpendicular_init(t_fractol *fractol);
 void				perpendicular_draw(t_fractol *fractol);
@@ -202,13 +194,13 @@ void				perpendicular_pthread(t_fractol *fractol);
 **			<====================== end perpendicular.c ======================>
 */
 /*
-**			<====================== start perpendicular_buffalo.c ======================>
+**			<====================== start perpendicular_buffalo.c ============>
 */
 void				perpendicular_buffalo_init(t_fractol *fractol);
 void				perpendicular_buffalo_draw(t_fractol *fractol);
 void				perpendicular_buffalo_pthread(t_fractol *fractol);
 /*
-**			<====================== end perpendicular_buffalo.c ======================>
+**			<====================== end perpendicular_buffalo.c ===============>
 */
 /*
 **			<====================== start menu.c ======================>

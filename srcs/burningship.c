@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rmaxima <rmaxima@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 15:34:52 by user              #+#    #+#             */
-/*   Updated: 2020/03/09 20:31:45 by user             ###   ########.fr       */
+/*   Updated: 2020/03/10 15:58:26 by rmaxima          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			burningship(t_fractol *fractol)
 		if (fractol->z_re2 + fractol->z_im2 > 4)
 		{
 			fractol->inside = 0;
-			break;
+			break ;
 		}
 		fractol->z.im = -2 * fabs(fractol->z.re * fractol->z.im)
 			+ fractol->c.im;
@@ -81,7 +81,8 @@ void			burningship_pthread(t_fractol *fractol)
 		tab[i] = *fractol;
 		tab[i].start = i * (HEIGHT / THREADS);
 		tab[i].end = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL, (void *(*)(void *))burningship_draw, (void *)&tab[i]))
+		if (pthread_create(&threads[i], NULL,
+			(void *(*)(void *))burningship_draw, (void *)&tab[i]))
 			exit(0);
 		i++;
 	}
